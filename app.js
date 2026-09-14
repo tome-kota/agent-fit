@@ -172,17 +172,17 @@
     {
       id: "q13",
       title: "AIに介入してほしい場面",
-      prompt: "ユーザーが次のような状態になったとき、AIに介入してほしいですか？ 当てはまるものを選び、介入の強さを指定してください。",
+      prompt: "あなたが次のような状態になったとき、AIに介入してほしいですか？ 当てはまるものを選び、介入の強さを指定してください。",
       type: "corrective"
     }
   ];
 
   const CORRECTIVE_ITEMS = [
-    { key: "overthinking", label: "ユーザーが検討や分析を続けすぎている" },
-    { key: "prematureExecution", label: "ユーザーが十分に考える前に実行へ進みすぎている" },
-    { key: "excessiveVerification", label: "ユーザーが必要以上に検証を続けている" },
-    { key: "excessiveDelegation", label: "ユーザーがAIに任せすぎて、ユーザー自身の理解が不足している" },
-    { key: "insufficientDelegation", label: "ユーザーがAIに任せられることまで抱え込んでいる" }
+    { key: "overthinking", label: "あなたが検討や分析を続けすぎている" },
+    { key: "prematureExecution", label: "あなたが十分に考える前に実行へ進みすぎている" },
+    { key: "excessiveVerification", label: "あなたが必要以上に検証を続けている" },
+    { key: "excessiveDelegation", label: "あなたがAIに任せすぎて、自分の理解が不足している" },
+    { key: "insufficientDelegation", label: "あなたがAIに任せられることまで自分で抱え込んでいる" }
   ];
 
   const RULES = [
