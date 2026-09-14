@@ -2,7 +2,7 @@
   "use strict";
 
   const SCHEMA_VERSION = 3;
-  const APP_VERSION = "0.7.0";
+  const APP_VERSION = "0.8.0";
 
   const SECTION_ORDER = [
     "decision",
@@ -172,17 +172,17 @@
     {
       id: "q13",
       title: "AIに介入してほしい場面",
-      prompt: "あなたはどんな時にAIに介入してほしいですか？ 当てはまるものを選んでください。",
+      prompt: "あなたが次のような状態になったとき、AIに介入してほしいですか？ 当てはまるものを選び、介入の強さを指定してください。",
       type: "corrective"
     }
   ];
 
   const CORRECTIVE_ITEMS = [
-    { key: "overthinking", label: "検討や分析を続けすぎる" },
-    { key: "prematureExecution", label: "十分考える前に実行へ進みすぎる" },
-    { key: "excessiveVerification", label: "必要以上に検証を続ける" },
-    { key: "excessiveDelegation", label: "AIに任せすぎて、自分の理解が不足する" },
-    { key: "insufficientDelegation", label: "AIに任せられることまで自分で抱え込む" }
+    { key: "overthinking", label: "あなたが検討や分析を続けすぎている" },
+    { key: "prematureExecution", label: "あなたが十分に考える前に実行へ進みすぎている" },
+    { key: "excessiveVerification", label: "あなたが必要以上に検証を続けている" },
+    { key: "excessiveDelegation", label: "あなたがAIに任せすぎて、自分の理解が不足している" },
+    { key: "insufficientDelegation", label: "あなたがAIに任せられることまで自分で抱え込んでいる" }
   ];
 
   const RULES = [
