@@ -2,7 +2,7 @@
   "use strict";
 
   const SCHEMA_VERSION = 3;
-  const APP_VERSION = "0.6.0";
+  const APP_VERSION = "0.7.0";
 
   const SECTION_ORDER = [
     "decision",
@@ -147,25 +147,25 @@
     },
     {
       id: "q11",
-      title: "不確実性が残っている場合",
-      prompt: "判断に必要な情報が一部不足しており、調べれば確実性は上がるが、その分作業は止まる。AIにどうしてほしいか。",
+      title: "事実・技術情報が不足している場合",
+      prompt: "依頼の意味や要件は理解できているが、判断に必要な事実・技術情報が一部不足しており、調べれば確実性は上がるが、その分作業は止まる。AIにどうしてほしいか。",
       type: "single",
       options: [
-        { value: "resolveFirst", label: "作業が止まっても、重要な不確実性を先に解消してほしい" },
-        { value: "reversibleProgress", label: "後から変更しやすい方法をいったん採用して進んでほしい" },
-        { value: "explicitAssumption", label: "自然な前提を明示し、その前提で進んでほしい" },
+        { value: "resolveFirst", label: "作業が止まっても、結果を左右する重要な事実・技術情報を先に確認してほしい" },
+        { value: "reversibleProgress", label: "事実・技術情報が不足していても、後から変更しやすい方法をいったん採用して進んでほしい" },
+        { value: "explicitAssumption", label: "事実・技術情報が不足している場合は、自然な前提を明示し、その前提で進んでほしい" },
         { value: "unspecified", label: "特にこだわらない" }
       ]
     },
     {
       id: "q12",
-      title: "軽微な曖昧さへの対応",
-      prompt: "依頼に小さな曖昧さがあり、確認すれば確実になる一方で作業はいったん止まる。AIにどうしてほしいか。",
+      title: "依頼の意図・要件が曖昧な場合",
+      prompt: "依頼の意図や要件、期待する成果物の解釈に小さな曖昧さがあり、確認すれば確実になる一方で作業はいったん止まる。AIにどうしてほしいか。",
       type: "single",
       options: [
-        { value: "ask", label: "判断せず、自分に確認してほしい" },
-        { value: "stateAndProceed", label: "自然な解釈を選び、その解釈を伝えて進んでほしい" },
-        { value: "proceedQuietly", label: "低リスクなら自然な解釈を選び、そのまま進んでほしい" },
+        { value: "ask", label: "依頼の意図や要件の解釈を自分で決めず、自分に確認してほしい" },
+        { value: "stateAndProceed", label: "依頼の意図や要件について自然な解釈を選び、その解釈を伝えて進んでほしい" },
+        { value: "proceedQuietly", label: "依頼の意図や要件の解釈が低リスクなら、自然な解釈を選び、そのまま進んでほしい" },
         { value: "unspecified", label: "特にこだわらない" }
       ]
     },
@@ -255,18 +255,18 @@
       text: "追加の手間を許容して、誤った前提・うまくいかない例・見落としやすい特殊なケースがないか積極的に確認する。" },
 
     { id: "U1", section: "verification", order: 40, path: "uncertainty.strategy", equals: "resolveFirst",
-      text: "結果を左右しそうな重要な不確実性が残る場合は、作業を止めてでも先に調査・確認して解消する。" },
+      text: "依頼の意味や要件は理解できているが、結果を左右しそうな重要な事実・技術情報が不足している場合は、作業を止めてでも先に調査・確認して解消する。" },
     { id: "U2", section: "verification", order: 50, path: "uncertainty.strategy", equals: "reversibleProgress",
-      text: "不確実性が残る場合は、後から変更しやすい方法をいったん採用して進め、必要に応じて修正する。" },
+      text: "依頼の意味や要件は理解できているが、事実・技術情報に不確実性が残る場合は、後から変更しやすい方法をいったん採用して進め、必要に応じて修正する。" },
     { id: "U3", section: "verification", order: 60, path: "uncertainty.strategy", equals: "explicitAssumption",
-      text: "不確実性が残る場合は、自然な前提を明示し、その前提に基づいて作業を進める。" },
+      text: "依頼の意味や要件は理解できているが、事実・技術情報に不確実性が残る場合は、自然な前提を明示し、その前提に基づいて作業を進める。" },
 
     { id: "I1", section: "interaction", order: 10, path: "interaction.ambiguity", equals: "ask",
-      text: "依頼に小さな曖昧さがある場合でも、解釈を自分で決めずユーザーへ確認する。" },
+      text: "依頼の意図や要件、期待する成果物の解釈に曖昧さがある場合でも、解釈を自分で決めずユーザーへ確認する。" },
     { id: "I2", section: "interaction", order: 20, path: "interaction.ambiguity", equals: "stateAndProceed",
-      text: "依頼に小さな曖昧さがある場合は、自然な解釈を選び、その解釈を明示してから作業を進める。" },
+      text: "依頼の意図や要件、期待する成果物の解釈に曖昧さがある場合は、自然な解釈を選び、その解釈を明示してから作業を進める。" },
     { id: "I3", section: "interaction", order: 30, path: "interaction.ambiguity", equals: "proceedQuietly",
-      text: "低リスクで後から修正できる小さな曖昧さは、自然な解釈を選んで作業を止めずに進める。" },
+      text: "依頼の意図や要件、期待する成果物の解釈に関する曖昧さが低リスクで後から修正できる場合は、自然な解釈を選んで作業を止めずに進める。" },
 
     { id: "C1a", section: "corrective", order: 10, path: "corrective.overthinking", equals: "mention",
       text: "追加の検討や分析による価値が低くなっているようなら、そのことをユーザーへ指摘する。" },
