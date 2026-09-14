@@ -2,7 +2,7 @@
   "use strict";
 
   const SCHEMA_VERSION = 3;
-  const APP_VERSION = "0.8.0";
+  const APP_VERSION = "0.9.0";
 
   const SECTION_ORDER = [
     "decision",
@@ -33,7 +33,7 @@
       options: [
         { value: "agent", label: "AIが判断してそのまま進める" },
         { value: "recommend", label: "AIがよいと思う方法を選んで進める" },
-        { value: "human", label: "選択肢を示し、自分に判断を求める" },
+        { value: "human", label: "選択肢を示し、ユーザーに判断を求める" },
         { value: "unspecified", label: "特にこだわらない" }
       ]
     },
@@ -44,8 +44,8 @@
       type: "single",
       options: [
         { value: "agent", label: "十分な根拠があるならAIが判断して進めてよい" },
-        { value: "recommend", label: "AIのおすすめ案と理由を示し、自分の確認を求めてほしい" },
-        { value: "human", label: "選択肢とそれぞれの利点・欠点を示し、最終判断は自分に任せてほしい" },
+        { value: "recommend", label: "AIのおすすめ案と理由を示し、ユーザーに確認を求めてほしい" },
+        { value: "human", label: "選択肢とそれぞれの利点・欠点を示し、最終判断はユーザーに任せてほしい" },
         { value: "unspecified", label: "特にこだわらない" }
       ]
     },
@@ -163,7 +163,7 @@
       prompt: "依頼の意図や要件、期待する成果物の解釈に小さな曖昧さがあり、確認すれば確実になる一方で作業はいったん止まる。AIにどうしてほしいか。",
       type: "single",
       options: [
-        { value: "ask", label: "依頼の意図や要件の解釈を自分で決めず、自分に確認してほしい" },
+        { value: "ask", label: "AIが依頼の意図や要件の解釈を独断で決めず、ユーザーに確認してほしい" },
         { value: "stateAndProceed", label: "依頼の意図や要件について自然な解釈を選び、その解釈を伝えて進んでほしい" },
         { value: "proceedQuietly", label: "依頼の意図や要件の解釈が低リスクなら、自然な解釈を選び、そのまま進んでほしい" },
         { value: "unspecified", label: "特にこだわらない" }
@@ -172,17 +172,17 @@
     {
       id: "q13",
       title: "AIに介入してほしい場面",
-      prompt: "あなたが次のような状態になったとき、AIに介入してほしいですか？ 当てはまるものを選び、介入の強さを指定してください。",
+      prompt: "ユーザーが次のような状態になったとき、AIに介入してほしいですか？ 当てはまるものを選び、介入の強さを指定してください。",
       type: "corrective"
     }
   ];
 
   const CORRECTIVE_ITEMS = [
-    { key: "overthinking", label: "あなたが検討や分析を続けすぎている" },
-    { key: "prematureExecution", label: "あなたが十分に考える前に実行へ進みすぎている" },
-    { key: "excessiveVerification", label: "あなたが必要以上に検証を続けている" },
-    { key: "excessiveDelegation", label: "あなたがAIに任せすぎて、自分の理解が不足している" },
-    { key: "insufficientDelegation", label: "あなたがAIに任せられることまで自分で抱え込んでいる" }
+    { key: "overthinking", label: "ユーザーが検討や分析を続けすぎている" },
+    { key: "prematureExecution", label: "ユーザーが十分に考える前に実行へ進みすぎている" },
+    { key: "excessiveVerification", label: "ユーザーが必要以上に検証を続けている" },
+    { key: "excessiveDelegation", label: "ユーザーがAIに任せすぎて、ユーザー自身の理解が不足している" },
+    { key: "insufficientDelegation", label: "ユーザーがAIに任せられることまで抱え込んでいる" }
   ];
 
   const RULES = [
@@ -262,7 +262,7 @@
       text: "依頼の意味や要件は理解できているが、事実・技術情報に不確実性が残る場合は、自然な前提を明示し、その前提に基づいて作業を進める。" },
 
     { id: "I1", section: "interaction", order: 10, path: "interaction.ambiguity", equals: "ask",
-      text: "依頼の意図や要件、期待する成果物の解釈に曖昧さがある場合でも、解釈を自分で決めずユーザーへ確認する。" },
+      text: "依頼の意図や要件、期待する成果物の解釈に曖昧さがある場合、AIが独断で解釈を決めず、ユーザーへ確認する。" },
     { id: "I2", section: "interaction", order: 20, path: "interaction.ambiguity", equals: "stateAndProceed",
       text: "依頼の意図や要件、期待する成果物の解釈に曖昧さがある場合は、自然な解釈を選び、その解釈を明示してから作業を進める。" },
     { id: "I3", section: "interaction", order: 30, path: "interaction.ambiguity", equals: "proceedQuietly",
