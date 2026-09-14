@@ -95,6 +95,69 @@
     color: #333;
   }
 
+  .placement-guide {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .placement-title {
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .placement-intro {
+    margin-bottom: 16px;
+  }
+
+  .placement-tabs {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .placement-tab {
+    appearance: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    padding: 8px 0 9px;
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .placement-tab:hover {
+    color: var(--text);
+  }
+
+  .placement-tab[aria-selected="true"] {
+    border-bottom-color: var(--text);
+    color: var(--text);
+  }
+
+  .placement-panel {
+    min-height: 92px;
+  }
+
+  .placement-panel code {
+    display: inline-block;
+    max-width: 100%;
+    padding: 2px 5px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    overflow-wrap: anywhere;
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13px;
+  }
+
+  .placement-panel p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
   .muted {
     color: var(--muted);
   }
@@ -148,6 +211,7 @@
   .option:focus-visible,
   .btn:focus-visible,
   .link-button:focus-visible,
+  .placement-tab:focus-visible,
   .check-row:focus-within,
   .intensity-option:focus-within {
     outline: 2px solid var(--focus);
@@ -352,34 +416,6 @@
   }
 
   .intro-points li + li { margin-top: 5px; }
-
-  @media (max-width: 560px) {
-    .app {
-      width: min(100% - 20px, var(--max));
-      padding-top: 16px;
-    }
-
-    .panel {
-      margin-top: 22px;
-      padding: 20px 16px;
-    }
-
-    .topbar {
-      padding-bottom: 12px;
-    }
-
-    .nav {
-      align-items: stretch;
-    }
-
-    .nav .btn {
-      min-width: 88px;
-    }
-
-    .result-actions .btn {
-      flex: 1 1 145px;
-    }
-  }
 
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }

@@ -2,7 +2,7 @@
   "use strict";
 
   const SCHEMA_VERSION = 3;
-  const APP_VERSION = "0.5.1";
+  const APP_VERSION = "0.6.0";
 
   const SECTION_ORDER = [
     "decision",
@@ -297,6 +297,53 @@
     question: el("questionView"),
     result: el("resultView")
   };
+
+  const placementTabs = Array.from(document.querySelectorAll("[data-placement-tab]"));
+  const placementPanels = Array.from(document.querySelectorAll("[data-placement-panel]"));
+
+  function selectPlacementTab(tabName, shouldFocus = false) {
+    const selectedTab = placementTabs.find(tab => tab.dataset.placementTab === tabName);
+    if (!selectedTab) return;
+
+    placementTabs.forEach(tab => {
+      const isSelected = tab === selectedTab;
+      tab.setAttribute("aria-selected", String(isSelected));
+      tab.tabIndex = isSelected ? 0 : -1;
+    });
+
+    placementPanels.forEach(panel => {
+      const isSelected = panel.dataset.placementPanel === tabName;
+      panel.classList.toggle("hidden", !isSelected);
+      panel.setAttribute("aria-hidden", String(!isSelected));
+    });
+
+    if (shouldFocus) selectedTab.focus();
+  }
+
+  placementTabs.forEach((tab, selectedIndex) => {
+    tab.addEventListener("click", () => {
+      selectPlacementTab(tab.dataset.placementTab);
+    });
+
+    tab.addEventListener("keydown", event => {
+      let nextIndex = null;
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        nextIndex = (selectedIndex + 1) % placementTabs.length;
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        nextIndex = (selectedIndex - 1 + placementTabs.length) % placementTabs.length;
+      } else if (event.key === "Home") {
+        nextIndex = 0;
+      } else if (event.key === "End") {
+        nextIndex = placementTabs.length - 1;
+      }
+
+      if (nextIndex === null) return;
+      event.preventDefault();
+      selectPlacementTab(placementTabs[nextIndex].dataset.placementTab, true);
+    });
+  });
+
+  selectPlacementTab("copilot");
 
   let currentIndex = 0;
   let responses = createEmptyResponses();

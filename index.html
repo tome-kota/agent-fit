@@ -2,15 +2,14 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI協働設定ツール v0.5.1</title>
+<title>AI協働設定ツール v0.6.0</title>
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <main class="app">
   <header class="topbar">
     <div class="brand">AI協働設定ツール</div>
-    <div class="version">v0.5.1</div>
+    <div class="version">v0.6.0</div>
   </header>
 
   <section id="introView" class="panel">
@@ -62,6 +61,32 @@
         <pre id="markdownOutput"></pre>
       </div>
       <div id="copyStatus" class="status" aria-live="polite"></div>
+
+      <div class="placement-guide" aria-label="生成したルールの配置先">
+        <p class="placement-title">生成したルールの配置先</p>
+        <p class="placement-intro">この出力は特定のリポジトリ向けではなく、あなた個人に適用するグローバルルールとして使います。</p>
+        <p class="placement-intro">リポジトリ内の設定ファイルとは異なり、複数のワークスペースに適用されます。</p>
+
+        <div class="placement-tabs" role="tablist" aria-label="配置先の選択">
+          <button class="placement-tab" id="copilotTab" type="button" role="tab" aria-selected="true" aria-controls="copilotPanel" data-placement-tab="copilot">GitHub Copilot</button>
+          <button class="placement-tab" id="codexTab" type="button" role="tab" aria-selected="false" aria-controls="codexPanel" data-placement-tab="codex" tabindex="-1">Codex</button>
+          <button class="placement-tab" id="kiroTab" type="button" role="tab" aria-selected="false" aria-controls="kiroPanel" data-placement-tab="kiro" tabindex="-1">Kiro</button>
+        </div>
+
+        <div class="placement-panel" id="copilotPanel" role="tabpanel" aria-labelledby="copilotTab" data-placement-panel="copilot">
+          <code>%USERPROFILE%\.copilot\instructions\agentfit.instructions.md</code>
+          <p>AGENTS.md をこの名前に変更して配置。</p>
+          <p>常時適用する場合は、先頭に <code>applyTo: &quot;**&quot;</code> の front matter を追加します。</p>
+        </div>
+        <div class="placement-panel hidden" id="codexPanel" role="tabpanel" aria-labelledby="codexTab" data-placement-panel="codex" aria-hidden="true">
+          <code>%USERPROFILE%\.codex\AGENTS.md</code>
+          <p>ダウンロードしたファイルをそのまま配置します。</p>
+        </div>
+        <div class="placement-panel hidden" id="kiroPanel" role="tabpanel" aria-labelledby="kiroTab" data-placement-panel="kiro" aria-hidden="true">
+          <code>%USERPROFILE%\.kiro\steering\AGENTS.md</code>
+          <p>ダウンロードしたファイルをそのまま配置します。</p>
+        </div>
+      </div>
     </div>
 
     <details>

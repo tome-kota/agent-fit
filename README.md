@@ -33,24 +33,42 @@
 
 単純な静的ファイルなので `index.html` を直接開ける。
 
-HTTP 経由で確認したい場合は、任意の静的HTTPサーバーをリポジトリ直下で起動する。
+HTTP 経由で確認したい場合は、リポジトリ直下で `http-server` を起動する。
 
 例:
 
 ```sh
-python -m http.server 8000
+npx http-server .
 ```
 
-その後 `http://localhost:8000/` を開く。
+表示されたURL（通常は `http://127.0.0.1:8080/`）を開く。
+
+## 生成結果の配置先
+
+生成される協働ルールは、特定リポジトリの設定ではなく、ユーザー個人に適用するグローバルルールとして使う想定である。
+リポジトリ内の設定ファイルとは異なり、複数のワークスペースに適用される。
+ダウンロードした `AGENTS.md` は、利用するツールに応じて次の場所へ配置する。
+
+| ツール | ユーザー共通の配置先 | 配置方法 |
+| --- | --- | --- |
+| GitHub Copilot（VS Code / Agent Host） | `%USERPROFILE%\.copilot\instructions\agentfit.instructions.md` | `AGENTS.md` をこのファイル名へ変更して配置。常時適用する場合は先頭に `applyTo: "**"` の front matter を追加 |
+| Codex | `%USERPROFILE%\.codex\AGENTS.md` | `AGENTS.md` をそのまま配置 |
+| Kiro | `%USERPROFILE%\.kiro\steering\AGENTS.md` | `AGENTS.md` をそのまま配置 |
+
+この案内は、2026年9月時点の公式ドキュメントに基づく。GitHub Copilotのリポジトリ固有設定である `.github/copilot-instructions.md` は、今回のグローバルルール用途には使わない。
+
+- [VS Code: Use custom instructions](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
+- [Codex: Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+- [Kiro: Steering](https://kiro.dev/docs/steering/)
 
 ## デプロイ方式
 
 GitHub Pages 公式 Actions を利用する。
 
-- `actions/checkout@v6`
-- `actions/configure-pages@v5`
-- `actions/upload-pages-artifact@v4`
-- `actions/deploy-pages@v4`
+- `actions/checkout@v7`
+- `actions/configure-pages@v6`
+- `actions/upload-pages-artifact@v5`
+- `actions/deploy-pages@v5`
 
 公開対象は workflow 内で `_site/` にコピーした以下の4ファイルだけである。
 
