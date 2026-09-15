@@ -2,14 +2,14 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>AI協働設定ツール v0.9.0</title>
+<title>AI協働設定ツール v0.10.0</title>
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <main class="app">
   <header class="topbar">
     <div class="brand">AI協働設定ツール</div>
-    <div class="version">v0.9.0</div>
+    <div class="version">v0.10.0</div>
   </header>
 
   <section id="introView" class="panel">
@@ -55,7 +55,8 @@
     <div id="resultContent" class="hidden">
       <div class="result-actions">
         <button class="btn primary" id="copyBtn" type="button">コピー</button>
-        <button class="btn" id="downloadBtn" type="button">.md として保存</button>
+        <button class="btn" id="downloadCopilotBtn" type="button">GitHub Copilot向けをダウンロード</button>
+        <button class="btn" id="downloadAgentsBtn" type="button">Kiro / Codex向けをダウンロード</button>
       </div>
       <div class="code-wrap">
         <pre id="markdownOutput"></pre>
@@ -75,8 +76,8 @@
 
         <div class="placement-panel" id="copilotPanel" role="tabpanel" aria-labelledby="copilotTab" data-placement-panel="copilot">
           <code>%USERPROFILE%\.copilot\instructions\agentfit.instructions.md</code>
-          <p>AGENTS.md をこの名前に変更して配置。</p>
-          <p>常時適用する場合は、先頭に <code>applyTo: &quot;**&quot;</code> の front matter を追加します。</p>
+          <p>GitHub Copilot向けのダウンロードファイルをそのまま配置します。</p>
+          <p><code>applyTo: &quot;**&quot;</code> の front matter は自動で含まれます。</p>
         </div>
         <div class="placement-panel hidden" id="codexPanel" role="tabpanel" aria-labelledby="codexTab" data-placement-panel="codex" aria-hidden="true">
           <code>%USERPROFILE%\.codex\AGENTS.md</code>

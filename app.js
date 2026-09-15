@@ -2,7 +2,18 @@
   "use strict";
 
   const SCHEMA_VERSION = 3;
-  const APP_VERSION = "0.9.0";
+  const APP_VERSION = "0.10.0";
+
+  const DOWNLOAD_PROFILES = {
+    copilot: {
+      filename: "agentfit.instructions.md",
+      transform: markdown => `---\napplyTo: "**"\n---\n\n${markdown}`
+    },
+    agents: {
+      filename: "AGENTS.md",
+      transform: markdown => markdown
+    }
+  };
 
   const SECTION_ORDER = [
     "decision",
@@ -649,13 +660,17 @@
     }
   }
 
-  function downloadMarkdown() {
-    const text = el("markdownOutput").textContent;
+  function downloadMarkdown(profileName) {
+    const profile = DOWNLOAD_PROFILES[profileName];
+    if (!profile) return;
+
+    const markdown = el("markdownOutput").textContent;
+    const text = profile.transform(markdown);
     const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "AGENTS.md";
+    a.download = profile.filename;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -703,7 +718,8 @@
   });
 
   el("copyBtn").addEventListener("click", copyMarkdown);
-  el("downloadBtn").addEventListener("click", downloadMarkdown);
+  el("downloadCopilotBtn").addEventListener("click", () => downloadMarkdown("copilot"));
+  el("downloadAgentsBtn").addEventListener("click", () => downloadMarkdown("agents"));
 
   el("editAnswersBtn").addEventListener("click", () => {
     currentIndex = 0;

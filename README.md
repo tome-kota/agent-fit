@@ -47,13 +47,13 @@ npx http-server .
 
 生成される協働ルールは、特定リポジトリの設定ではなく、ユーザー個人に適用するグローバルルールとして使う想定である。
 リポジトリ内の設定ファイルとは異なり、複数のワークスペースに適用される。
-ダウンロードした `AGENTS.md` は、利用するツールに応じて次の場所へ配置する。
+ダウンロードしたファイルは、利用するツールに応じて次の場所へ配置する。
 
 | ツール | ユーザー共通の配置先 | 配置方法 |
 | --- | --- | --- |
-| GitHub Copilot（VS Code / Agent Host） | `%USERPROFILE%\.copilot\instructions\agentfit.instructions.md` | `AGENTS.md` をこのファイル名へ変更して配置。常時適用する場合は先頭に `applyTo: "**"` の front matter を追加 |
-| Codex | `%USERPROFILE%\.codex\AGENTS.md` | `AGENTS.md` をそのまま配置 |
-| Kiro | `%USERPROFILE%\.kiro\steering\AGENTS.md` | `AGENTS.md` をそのまま配置 |
+| GitHub Copilot（VS Code / Agent Host） | `%USERPROFILE%\.copilot\instructions\agentfit.instructions.md` | GitHub Copilot向けのダウンロードファイルをそのまま配置。`applyTo: "**"` の front matter は自動付与 |
+| Codex | `%USERPROFILE%\.codex\AGENTS.md` | Kiro / Codex向けのダウンロードファイルをそのまま配置 |
+| Kiro | `%USERPROFILE%\.kiro\steering\AGENTS.md` | Kiro / Codex向けのダウンロードファイルをそのまま配置 |
 
 この案内は、2026年9月時点の公式ドキュメントに基づく。GitHub Copilotのリポジトリ固有設定である `.github/copilot-instructions.md` は、今回のグローバルルール用途には使わない。
 
